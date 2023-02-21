@@ -9,6 +9,11 @@ class BlogPost extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'body',
+        'user_id'
+    ];
     //protected $table = "nom_table";
     //protected $primaryKey = "nom_id";
     // $timestamp = false

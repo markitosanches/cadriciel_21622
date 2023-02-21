@@ -19,5 +19,7 @@ Route::get('/', function () {
 
 use App\Http\Controllers\BlogPostController;
 
-Route::get('blog', [BlogPostController::class, 'index']);
-Route::get('blog/{blogPost}', [BlogPostController::class, 'show']);
+Route::get('blog', [BlogPostController::class, 'index'])->name('blog.index');
+Route::get('blog/{blogPost}', [BlogPostController::class, 'show'])->name('blog.show');
+Route::get('blog-create', [BlogPostController::class, 'create'])->name('blog.create');
+Route::post('blog-create', [BlogPostController::class, 'store'])->name('blog.store');
