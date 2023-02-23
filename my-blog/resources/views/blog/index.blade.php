@@ -25,6 +25,9 @@
                             @endforelse
                         </ul>
                     </div>
+                    <div class="card-footer">
+                        <a href="{{route('blog.create')}}" class="btn btn-success">Ajouter</a>
+                    </div>
                 </div>
             </div>
         </div>

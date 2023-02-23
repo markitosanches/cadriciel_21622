@@ -67,7 +67,7 @@ class BlogPostController extends Controller
      */
     public function edit(BlogPost $blogPost)
     {
-        //
+        return view('blog.edit', ['blogPost' => $blogPost]);
     }
 
     /**
@@ -79,9 +79,13 @@ class BlogPostController extends Controller
      */
     public function update(Request $request, BlogPost $blogPost)
     {
-        //
-    }
+        $blogPost->update([
+            'title' => $request->title,
+            'body'  => $request->body
+        ]);
 
+        return redirect(route('blog.show', $blogPost->id))->withSuccess('Article mis à jour avec success');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -90,6 +94,8 @@ class BlogPostController extends Controller
      */
     public function destroy(BlogPost $blogPost)
     {
-        //
+        $blogPost->delete();
+        return redirect(route('blog.index'));
     }
+
 }
