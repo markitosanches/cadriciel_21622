@@ -27,3 +27,6 @@ Route::get('blog-edit/{blogPost}', [BlogPostController::class, 'edit'])->name('b
 Route::put('blog-edit/{blogPost}', [BlogPostController::class, 'update'])->name('blog.update');
 Route::delete('blog-edit/{blogPost}', [BlogPostController::class, 'destroy'])->name('blog.delete');
 
+Route::get('query', [BlogPostController::class, 'query']);
+
+Route::get('blog-page', [BlogPostController::class, 'page']);

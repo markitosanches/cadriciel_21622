@@ -14,7 +14,14 @@ class BlogPost extends Model
         'body',
         'user_id'
     ];
-    //protected $table = "nom_table";
-    //protected $primaryKey = "nom_id";
+
+    //blog_posts
+    
+    // protected $table = "nom_table";
+    // protected $primaryKey = "nom_id";
     // $timestamp = false
+
+    public function blogHasUser(){
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
+    }
 }

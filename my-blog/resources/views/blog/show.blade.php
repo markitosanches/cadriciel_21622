@@ -25,7 +25,12 @@
                 {!! $blogPost->body !!}
                 </p>
                 <p>
-                    <strong>Author : </strong> {{$blogPost->user_id}}
+                    <strong>Author : </strong> 
+                    @isset($blogPost->blogHasuser)
+                        {{$blogPost->blogHasuser->name}}
+                    @endisset
+
+                    {{-- PHP V8  $blogPost->blogHasuser?->name --}}
                 </p>
                 <a href="{{route('blog.index')}}" class="btn btn-sm btn-primary">Retourner</a>
             </div>
