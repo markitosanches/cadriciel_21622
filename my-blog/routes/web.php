@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\CustomAuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-use App\Http\Controllers\BlogPostController;
+
 
 Route::get('blog', [BlogPostController::class, 'index'])->name('blog.index');
 Route::get('blog/{blogPost}', [BlogPostController::class, 'show'])->name('blog.show');
@@ -30,3 +31,7 @@ Route::delete('blog-edit/{blogPost}', [BlogPostController::class, 'destroy'])->n
 Route::get('query', [BlogPostController::class, 'query']);
 
 Route::get('blog-page', [BlogPostController::class, 'page']);
+
+Route::get('registration', [CustomAuthController::class, 'create'])->name('user.registration');
+Route::post('registration', [CustomAuthController::class, 'store']);
+Route::get('user-list', [CustomAuthController::class, 'userList'])->name('user.list');
