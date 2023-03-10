@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class CustomAuthController extends Controller
 {
@@ -15,7 +16,7 @@ class CustomAuthController extends Controller
      */
     public function index()
     {
-        //
+        return view('auth.login');
     }
 
     /**
@@ -41,7 +42,7 @@ class CustomAuthController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'min:6|max:20'
         ]);
-        //redirect->back()->withErrors([])->withInputs
+        //redirect->back()->withErrors([])->withInput
 
         $user = new User;
         $user->fill($request->all());
@@ -97,8 +98,34 @@ class CustomAuthController extends Controller
     }
     
     public function userList(){
-        $users = user::select('name', 'email')->paginate(5);
+        $users = user::select('id','name','email')->paginate(5);
         return view('auth.user-list', ['users' => $users]);
+    }
+
+    public function authentication(Request $request){
+        $request->validate([
+            'email' => 'required|email|exists:users',
+            'password' => 'required'
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        
+        if(!Auth::validate($credentials)):
+            return redirect()->back()->withErrors(trans('auth.password'))->withInput();
+        endif;
+       
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+     
+        Auth::login($user);
+       
+        return redirect()->intended(route('user.list'));
+
+        // return  $credentials;
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect(route('login'));
     }
 
 }

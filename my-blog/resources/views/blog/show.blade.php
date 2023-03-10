@@ -26,11 +26,11 @@
                 </p>
                 <p>
                     <strong>Author : </strong> 
-                    @isset($blogPost->blogHasuser)
-                        {{$blogPost->blogHasuser->name}}
+                    @isset($blogPost->blogHasUser)
+                        {{$blogPost->blogHasUser->name}}
                     @endisset
 
-                    {{-- PHP V8  $blogPost->blogHasuser?->name --}}
+                    {{-- PHP V8  $blogPost->blogHasUser?->name --}}
                 </p>
                 <a href="{{route('blog.index')}}" class="btn btn-sm btn-primary">Retourner</a>
             </div>

@@ -6,6 +6,7 @@ use App\Models\BlogPost;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class BlogPostController extends Controller
 {
@@ -42,7 +43,7 @@ class BlogPostController extends Controller
         $blogPost = BlogPost::create([
             'title' => $request->title,
             'body' => $request->body,
-            'user_id' => 1
+            'user_id' => Auth::User()->id
         ]);
 
         return redirect(route('blog.show', $blogPost->id));
