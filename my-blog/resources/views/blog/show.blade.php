@@ -32,6 +32,12 @@
 
                     {{-- PHP V8  $blogPost->blogHasUser?->name --}}
                 </p>
+                <p>
+                    <strong>Category :</strong>
+                    @isset($blogPost->blogHasCategory)
+                        {{ $blogPost->blogHasCategory->category}}
+                    @endisset
+                </p>
                 <a href="{{route('blog.index')}}" class="btn btn-sm btn-primary">Retourner</a>
             </div>
         </div>

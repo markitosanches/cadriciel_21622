@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,12 @@ class BlogPostController extends Controller
      */
     public function create()
     {
-        return view('blog.create');
+        /*$categories = Category::select()
+                        ->orderby('category')
+                        ->get();*/
+        $categories = Category::selectCategory();
+        
+        return view('blog.create', ['categories' => $categories]);
     }
 
     /**
@@ -43,7 +49,8 @@ class BlogPostController extends Controller
         $blogPost = BlogPost::create([
             'title' => $request->title,
             'body' => $request->body,
-            'user_id' => Auth::User()->id
+            'user_id' => Auth::User()->id,
+            'categories_id' => $request->categories_id
         ]);
 
         return redirect(route('blog.show', $blogPost->id));
@@ -81,7 +88,11 @@ class BlogPostController extends Controller
      */
     public function edit(BlogPost $blogPost)
     {
-        return view('blog.edit', ['blogPost' => $blogPost]);
+        //$categories = new Category;
+        //$categories = $categories->selectCategory();
+        $categories = Category::selectCategory();
+
+        return view('blog.edit', ['blogPost' => $blogPost, 'categories'=> $categories]);
     }
 
     /**
@@ -95,7 +106,8 @@ class BlogPostController extends Controller
     {
         $blogPost->update([
             'title' => $request->title,
-            'body'  => $request->body
+            'body'  => $request->body,
+            'categories_id' => $request->categories_id
         ]);
 
         return redirect(route('blog.show', $blogPost->id))->withSuccess('Article mis à jour avec success');
