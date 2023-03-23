@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\LocalizationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,3 +39,5 @@ Route::get('user-list', [CustomAuthController::class, 'userList'])->name('user.l
 Route::get('login', [CustomAuthController::class, 'index'])->name('login');
 Route::post('login', [CustomAuthController::class, 'authentication']);
 Route::get('logout', [CustomAuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::get('lang/{locale}', [LocalizationController::class, 'index'])->name('lang');
