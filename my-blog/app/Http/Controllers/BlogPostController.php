@@ -34,6 +34,8 @@ class BlogPostController extends Controller
                         ->orderby('category')
                         ->get();*/
         $categories = Category::selectCategory();
+
+       // return $categories;
         
         return view('blog.create', ['categories' => $categories]);
     }
@@ -46,12 +48,26 @@ class BlogPostController extends Controller
      */
     public function store(Request $request)
     {
-        $blogPost = BlogPost::create([
+        /*$blogPost = BlogPost::create([
             'title' => $request->title,
             'body' => $request->body,
+            'title_fr' => $request->title_fr,
+            'body_fr' => $request->body_fr,
             'user_id' => Auth::User()->id,
             'categories_id' => $request->categories_id
+        ]);*/
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'categories_id' => 'required'
         ]);
+
+        $blogPost = new BlogPost;
+        $blogPost->fill($request->all());
+        $blogPost->user_id = Auth::User()->id;
+        $blogPost->save();
+
+
 
         return redirect(route('blog.show', $blogPost->id));
     }
