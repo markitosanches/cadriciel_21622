@@ -32,6 +32,7 @@ Route::delete('blog-edit/{blogPost}', [BlogPostController::class, 'destroy'])->n
 Route::get('query', [BlogPostController::class, 'query']);
 
 Route::get('blog-page', [BlogPostController::class, 'page'])->middleware('auth');
+Route::get('blog-pdf/{blogPost}', [BlogPostController::class, 'pdf'])->name('blog.pdf')->middleware('auth');
 
 Route::get('registration', [CustomAuthController::class, 'create'])->name('user.registration');
 Route::post('registration', [CustomAuthController::class, 'store']);

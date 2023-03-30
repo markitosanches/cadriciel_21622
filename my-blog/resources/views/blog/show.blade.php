@@ -26,6 +26,7 @@
                 </p>
                 <p>
                     <strong>Author : </strong> 
+                    
                     @isset($blogPost->blogHasUser)
                         {{$blogPost->blogHasUser->name}}
                     @endisset
@@ -43,10 +44,13 @@
         </div>
         <div class="row mt-2">
             <hr>
-            <div class="col-6">
-                <a href="{{ route('blog.edit', $blogPost->id)}}" class="btn btn-success btn-sm">Mettre à jour</a>
+            <div class="col-4">
+                <a href="{{ route('blog.pdf', $blogPost->id)}}" class="btn btn-warning btn-sm">PDF</a>
             </div>
-            <div class="col-6">
+            <div class="col-4">
+                <a href="{{ route('blog.edit', $blogPost->id)}}" class="btn btn-success btn-sm" target="_blank">Mettre à jour</a>
+            </div>
+            <div class="col-4">
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Effacer
