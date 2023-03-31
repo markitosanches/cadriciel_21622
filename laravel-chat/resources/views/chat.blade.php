@@ -4,10 +4,10 @@
     <div class="card">
         <div class="card-header">Chat</div>
         <div class="card-body">
-            <chat-messages></chat-messages>
+            <chat-messages :messages="messages"></chat-messages>
         </div>
         <div class="card-footer">
-            <chat-form></chat-form>
+            <chat-form v-on:messagesent="addMessage" :user="{{Auth::user()}}"></chat-form>
         </div>
     </div>
 </div>
